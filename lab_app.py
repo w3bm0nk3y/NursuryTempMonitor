@@ -47,7 +47,7 @@ The user can explore historical data to Plotly for visualisation and processing.
 from flask import Flask, request, render_template
 import time
 import datetime
-import arrow
+#import arrow
 
 app = Flask(__name__)
 app.debug = True  # Make this False if you are no longer debugging
@@ -62,7 +62,8 @@ def hello():
 def lab_temp():
     import sys
     import Adafruit_DHT
-    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 27)
+    temperature = 1.8 * temperature + 32
     if humidity is not None and temperature is not None:
         return render_template("lab_temp.html", temp=temperature, hum=humidity)
     else:
